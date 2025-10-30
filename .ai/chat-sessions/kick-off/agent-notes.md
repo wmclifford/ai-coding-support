@@ -201,3 +201,86 @@ Recent actions (2025-10-30):
 
 - Left a placeholder (`<TOOLING_REPO_PLACEHOLDER>`) in the YAML header for the tooling repo; user will provide the
   tooling repo URL when available.
+
+Session wrap-up (2025-10-30)
+
+- Status: Core governance documents updated and committed locally.
+  - `docs/governance/Goals.md` — completed and machine-readable YAML header added; "Next steps" removed per user
+    request.
+  - `docs/governance/Conventions.md` — YAML header added; `Code Structure` and `Naming & Packaging` populated with
+    meta-project guidance.
+  - `docs/governance/System.md` — YAML header added; CI job matrix, publishing guidance, and validation tooling
+    placeholder added.
+  - `README.md` — updated with landing page and quickstart.
+  - Examples under `examples/` were added and committed.
+
+- Decisions recorded (user confirmations applied):
+  - Primary audience: `solo_developers` (also support `small_teams`).
+  - Supported stacks (in preference): `java`, `python`, `nodejs`, `golang`.
+  - Initial template to implement first: `nodejs`.
+  - Automation default: `human_review_required` (plan to move to `auto_open_pr_only` later).
+  - CI & quality gates for MVP: `gitleaks`, `commitlint`, and coverage `80%`.
+  - Evidence ritual: required for all tasks (including docs/examples).
+  - Publishing strategy: publish reusable Actions from this repo (revisit if >5-10 actions).
+  - License: keep existing LICENSE (MIT).
+  - Governance approver model: owner-driven.
+  - Prompt template path: `templates/<language>/prompts`.
+
+- Repo actions performed in this session:
+  - Edited and saved: `docs/governance/Goals.md`, `Conventions.md`, `System.md`, `README.md`.
+  - Added and committed: `examples/` files, updated governance docs, and `README.md` (separate commit).
+
+Planned, targeted small tasks to prepare for bootstrapping templates (prioritized for next session)
+
+1) Create a short "Task authoring" guideline (docs/tasks/authoring.md)
+  - Purpose: explain the fields, acceptance criteria, evidence ritual, and how to write a task agents can consume.
+  - Acceptance: a new doc exists and covers required fields from `schemas/task-file.schema.v0.1.json`.
+  - Estimated size: small (30–90 minutes).
+
+2) Produce three prompt templates (Markdown) for agent roles under `templates/prompts/`:
+  - `spec-author.md` — prompts and expected output format (task yaml + acceptance criteria).
+  - `implementer.md` — code generation rules, test generation, and staging/formatting rules.
+  - `reviewer.md` — code review checklist, audit checks, and PR readiness criteria.
+  - Acceptance: each prompt includes role, input, expected output, and one worked example.
+  - Estimated size: small-to-medium (60–120 minutes).
+
+3) Create a lightweight docs example workflow (`docs/examples/ci-example.md`) showing how to wire the external task
+   validator
+  - Purpose: document how a repo should call the external `task_validator` (tooling repo placeholder) from workflows.
+  - Acceptance: includes example snippet and env var placeholders for `TOOLING_REPO`.
+  - Estimated size: small (30–60 minutes).
+
+4) Draft a minimal `templates/nodejs/basic/` skeleton (no heavy deps) with:
+  - `README.md` (bootstrap steps), `prompts/` directory with the three role prompts, and `ci/` folder with an example
+    workflow fragment.
+  - Acceptance: README has clear bootstrap steps that should allow a dev to start within 15 minutes; prompts reference
+    the repo-level prompts.
+  - Estimated size: medium (1–3 hours).
+
+5) Create an `examples/Tasks/` checklist task for "Bootstrap nodejs template" (task YAML)
+  - Purpose: formalize the work as a Task that follows the Two-commit Evidence ritual.
+  - Acceptance: Task YAML present with acceptance criteria and evidence placeholders.
+  - Estimated size: small (30–60 minutes).
+
+6) Add a `docs/commits/.gitmessage` commit template and `.github/pull_request_template.md` if not present (or update if
+   present)
+  - Purpose: make it easy to follow Conventional Commits + Refs: [TASK-ID] in PRs.
+  - Acceptance: template files exist and are referenced in docs.
+  - Estimated size: small (15–30 minutes).
+
+7) Create a short onboarding checklist (`docs/ONBOARDING.md`) for first-time users to reach the 15-minute bootstrap goal
+  - Acceptance: checklists with commands and expected outcomes.
+  - Estimated size: small (30–60 minutes).
+
+Notes about tooling and separation of concerns
+
+- The task-file validator and enforcement tooling will live in a separate tooling repository (placeholder present in
+  System.md). We will reference it from example workflows in this repo.
+- Publishing GitHub Actions from this repo is the initial plan; if action count grows we will move some to dedicated
+  repos.
+
+Next session plan
+
+- Start by authoring and committing tasks 1–3 above, then iterate: produce the prompts (2) and nodejs skeleton (4).
+- After those are in place, we'll use the task-file schema to create the formal Task YAML (5) and follow the Two-commit
+  Evidence ritual during implementation.
