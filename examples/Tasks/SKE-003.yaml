@@ -1,0 +1,33 @@
+schemaVersion: 0.1.0
+id: SKE-003
+taskTitle: |
+  Gradle setup: configure JaCoCo to include integration tests.
+status: done
+rationale: Code coverage needs to include unit and integration tests.
+blockingTasks: [ ]
+tags: [ ]
+links:
+  related: [ ]
+  docs:
+    - Goals.md
+    - Conventions.md
+    - System.md
+acceptance:
+  fileGlobs:
+    - build.gradle
+  commands:
+    - ./gradlew clean check
+    - ./gradlew jacocoTestReport
+  testsMustExist: [ ]
+  minCoverage: 0.8
+evidence:
+  commit: 944516cbd93c86fcca686687408c7dbbf4bc264d
+  testSummary: |
+    - test: 0 tests, 0 failures
+    - integrationTest: 2 tests, 0 failures
+    - jacocoTestReport: generated (XML+HTML) at build/reports/jacoco/test
+  ciRunUrl:
+  prUrl:
+notes: |
+  - Ensure that the JaCoCo plugin is properly configured.
+  - Ensure that the JaCoCo report includes unit and integration tests.

@@ -1,0 +1,34 @@
+schemaVersion: 0.1.0
+id: SKE-002
+taskTitle: |
+  Walking skeleton: app boots, /actuator/health up, base packages wired.
+status: done
+rationale: End-to-end boot path before features.
+blockingTasks: [ ]
+tags: [ ]
+links:
+  related: [ ]
+  docs:
+    - Goals.md
+    - Conventions.md
+    - System.md
+acceptance:
+  fileGlobs:
+    - src/main/java/**/Application.java
+    - src/main/resources/application.yml
+    - src/integrationTest/java/**/ApplicationITest.java
+  commands:
+    - ./gradlew clean check
+  testsMustExist:
+    - src/integrationTest/java/**/ApplicationITest.java
+  minCoverage: 0.8
+evidence:
+  commit: 0319fade60c80755bf3d803e3f61a916eca59fbe
+  testSummary: |
+    - unit test task: 0 tests executed
+    - integrationTest: 2 tests executed, 0 failures, 0 skipped
+    - JaCoCo (unit): no execution data; jacocoTestReport skipped
+  ciRunUrl:
+  prUrl:
+notes:
+  - Ensure that the application starts up successfully and the `/actuator/health` endpoint returns 'UP'.
