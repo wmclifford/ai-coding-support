@@ -1,0 +1,39 @@
+schemaVersion: 0.1.0
+id: CFG-001
+taskTitle: |
+  Establish profiles (local, ci, dev, qa, staging, prod) and configuration structure.
+status: done
+rationale: Deterministic behavior per environment.
+blockingTasks: [ ]
+tags: [ ]
+links:
+  related: [ ]
+  docs:
+    - "System.md#Security"
+    - "System.md#CI/CD"
+acceptance:
+  fileGlobs:
+    - src/main/resources/application.yml
+    - src/main/resources/application-local.yml
+    - src/main/resources/application-ci.yml
+    - src/main/resources/application-dev.yml
+    - src/main/resources/application-qa.yml
+    - src/main/resources/application-staging.yml
+    - src/main/resources/application-prod.yml
+  commands:
+    - ./gradlew clean check
+  testsMustExist: [ ]
+  minCoverage: 0.8
+evidence:
+  commit: e683c5a2b0180a0a2abb1bcc0ce10630fb517eb6
+  testSummary: |
+    - Gradle: clean check → SUCCESS
+    - Unit tests: 0 tests, 0 failures
+    - Integration tests: 2 tests (ApplicationITest), 0 failures, 0 errors, 0 skipped
+    - Actuator /actuator/health verified UP
+    - Coverage: JaCoCo report generated for unit+integration; see build/reports/jacoco/test/html/index.html
+  ciRunUrl:
+  prUrl:
+notes: |
+  - Development profiles: local, ci.
+  - Deployment profiles: dev, qa, staging, prod.

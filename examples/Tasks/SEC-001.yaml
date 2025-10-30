@@ -1,0 +1,60 @@
+schemaVersion: 0.1.0
+id: SEC-001
+taskTitle: |
+  Enable JWT authentication.
+status: done
+rationale: |
+  - Secure application endpoints; leave health and actuator endpoints unprotected.
+  - Deployment environment supplies shared secret key with this service via environment variable.
+  - Application consumes shared secret key from environment via application properties YAML.
+blockingTasks: [ ]
+tags: [ ]
+links:
+  related: [ ]
+  docs:
+    - "System.md#Security"
+acceptance:
+  fileGlobs:
+    - build.gradle
+    - src/main/java/**/AuthController.java
+    - src/main/java/**/AuthRequest.java
+    - src/main/java/**/AuthResponse.java
+    - src/main/java/**/AuthService.java
+    - src/main/java/**/config/**/SecurityConfig.java
+    - src/main/resources/application*.yml
+    - src/test/java/**/AuthControllerTest.java
+    - src/test/java/**/AuthServiceTest.java
+    - src/test/java/**/QuoteControllerTest.java
+    - src/test/java/**/config/**/SecurityConfigTest.java
+    - src/integrationTest/java/**/ApplicationITest.java
+    - src/integrationTest/java/**/AuthControllerITest.java
+    - src/integrationTest/java/**/QuoteControllerITest.java
+  commands:
+    - ./gradlew clean check
+  testsMustExist:
+    - src/test/java/**/AuthControllerTest.java
+    - src/test/java/**/AuthServiceTest.java
+    - src/test/java/**/config/**/SecurityConfigTest.java
+    - src/integrationTest/java/**/ApplicationITest.java
+    - src/integrationTest/java/**/AuthControllerITest.java
+    - src/integrationTest/java/**/QuoteControllerITest.java
+  minCoverage: 0.8
+evidence:
+  commit: adbd65228b720850332fd308cd00dff60de64e74
+  testSummary: "Unit: 13 passed, 0 failed; Integration: 6 passed, 0 failed; JaCoCo LINE 91.97%"
+  ciRunUrl:
+  prUrl:
+notes:
+  - Add Spring Security dependencies where necessary.
+  - Lock down /v1/** endpoints; actuator health and springdoc stay open.
+  - Does not use RBAC to limit access; only requires JWT bearer token.
+  - JWT login uses shared secret key; do not use basic credentials (username/password) auth.
+  - Shared secret key provided in application YAML; different key per environment.
+  - Shared secret key provided to the application YAML via environment variable.
+  - Client must authenticate to the `AuthController`-supplied endpoint (/auth/login) using POST request providing shared secret key.
+  - Successful authentication request responds with valid JWT token and expiration timestamp.
+  - JWT token expiration time is 30 minutes.
+  - Existing tests must be updated to test both anonymous access attempts and authenticated access attempts.
+  - Include tests for auth success and auth failure; auth failure should respond with HTTP 400 Bad Request.
+  - Include test for when shared secret key is blank; fails fast; logs error message.
+  - Expand `ApplicationITest` to verify anonymous access to actuator and springdoc endpoints; tests should handle where endpoint is disabled due to profile settings.

@@ -1,0 +1,47 @@
+schemaVersion: 0.1.0
+id: API-001
+taskTitle: |
+  Quote API: create a REST API for random quotes (WebFlux controller + service + repo).
+status: done
+rationale: |
+  - Enforce invariants.
+  - Verify defaults and caps.
+  - No database; repository contains a handful of hard-coded quotes.
+blockingTasks: [ ]
+tags: [ ]
+links:
+  related: [ ]
+  docs:
+    - "Goals.md#Invariants"
+    - "Conventions.md#API"
+acceptance:
+  fileGlobs:
+    - src/main/java/**/QuoteController.java
+    - src/main/java/**/Quote.java
+    - src/main/java/**/QuoteResponse.java
+    - src/main/java/**/QuoteMapper.java
+    - src/main/java/**/QuoteService.java
+    - src/main/java/**/QuoteRepository.java
+    - src/test/java/**/QuoteControllerTest.java
+    - src/test/java/**/QuoteMapperTest.java
+    - src/test/java/**/QuoteServiceTest.java
+    - src/integrationTest/java/**/QuoteControllerITest.java
+  commands:
+    - ./gradlew clean check
+  testsMustExist:
+    - src/test/java/**/QuoteControllerTest.java
+    - src/test/java/**/QuoteServiceTest.java
+    - src/integrationTest/java/**/QuoteControllerITest.java
+  minCoverage: 0.8
+evidence:
+  commit: 25844453f45c606b397207af51b26750dc65a3f7
+  testSummary: "unit: 5 tests, 0 failures, 0 errors, 0 skipped; integration: 3 tests, 0 failures, 0 errors, 0 skipped; coverage (LINE): 85.3% (covered=29, missed=5)"
+  ciRunUrl:
+  prUrl:
+notes:
+  - Repository contains a handful of hard-coded quotes.
+  - Repository has method to return a random quote; use `Quote` entity.
+  - Controller has method to return a random quote; use `QuoteResponse`.
+  - Service has method to return a random quote; use `QuoteResponse`.
+  - Service uses `QuoteMapper` to convert `Quote` to `QuoteResponse`.
+  - Quote provides the text of the quote and the author.

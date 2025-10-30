@@ -1,0 +1,32 @@
+schemaVersion: 0.1.0
+id: SKE-001
+taskTitle: |
+  Gradle setup: configure Gradle for Spring Boot project based on Spring Boot v3.5.3
+status: done
+rationale: Add project framework dependencies.
+blockingTasks: [ ]
+tags: [ ]
+links:
+  related: [ ]
+  docs:
+    - Goals.md
+    - Conventions.md
+    - System.md
+acceptance:
+  fileGlobs:
+    - build.gradle
+    - gradle/libs.versions.toml
+  commands:
+    - ./gradlew tasks
+  testsMustExist: [ ]
+  minCoverage: 0.0
+evidence:
+  commit: 8fb53006780f55915e0d35d4188205b7eb394a5d
+  testSummary:
+  ciRunUrl:
+  prUrl:
+notes: |
+  - Ensure that the Gradle wrapper is properly configured and up-to-date.
+  - Verify that the project uses the correct version of Spring Boot.
+  - Ensure that the project's build configuration adheres to best practices for Spring Boot projects.
+  - Verify that the project includes the necessary Spring Boot starter dependencies.
