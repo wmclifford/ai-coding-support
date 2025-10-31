@@ -98,34 +98,45 @@ Why not store specs under `.github/`?
 Checklist (high-level):
 
 1. Spec pass (interactive)
-  - Agent reads governing docs
-  - Agent asks operator for task file path (e.g., `Tasks/CFG-001.yaml`)
-  - Agent reads the task file and summarizes acceptance criteria
-  - Agent produces a planned-diffs list (chat) and writes `spec.yaml` + `planned-diffs.md` to
-    `.ai/task-artifacts/CFG-001/`
-  - Agent waits for operator approval
+
+- Agent reads governing docs
+- Agent asks operator for task file path (e.g., `Tasks/CFG-001.yaml`)
+- Agent reads the task file and summarizes acceptance criteria
+- Agent produces a planned-diffs list (chat) and writes `spec.yaml` + `planned-diffs.md` to
+  `.ai/task-artifacts/CFG-001/`
+- Agent waits for operator approval
+
 2. Approval (operator)
-  - Operator reviews the chat spec and the working files (`.ai/task-artifacts/CFG-001/spec.yaml` and `planned-diffs.md`)
-  - Operator either requests changes or approves
+
+- Operator reviews the chat spec and the working files (`.ai/task-artifacts/CFG-001/spec.yaml` and `planned-diffs.md`)
+- Operator either requests changes or approves
+
 3. On approval: branch & initial commit
-  - Agent creates branch per convention `<type>/<task-id>-<slug>` (e.g., `feat/CFG-001-add-config`)
-  - Agent updates `Tasks/CFG-001.yaml` status -> `in_progress` and adds an evidence entry (branch name and timestamp)
-  - Agent commits and pushes the updated task file as the FIRST commit on the new branch with message like
-    `spec pass: branch created`
+
+- Agent creates branch per convention `<type>/<task-id>-<slug>` (e.g., `feat/CFG-001-add-config`)
+- Agent updates `Tasks/CFG-001.yaml` status -> `in_progress` and adds an evidence entry (branch name and timestamp)
+- Agent commits and pushes the updated task file as the FIRST commit on the new branch with message like
+  `spec pass: branch created`
+
 4. Scaffold pass (automated/interactive)
-  - The scaffold prompt reads the machine-readable `spec.yaml`
-  - Scaffold applies the minimal set of edits (scaffolding) listed in `planned_diffs` and commits them incrementally
-    with descriptive messages
-  - Scaffold produces `scaffold-report.md` in the same `.ai/task-artifacts/CFG-001/` directory summarising applied diffs
-    and any unresolved questions
+
+- The scaffold prompt reads the machine-readable `spec.yaml`
+- Scaffold applies the minimal set of edits (scaffolding) listed in `planned_diffs` and commits them incrementally
+  with descriptive messages
+- Scaffold produces `scaffold-report.md` in the same `.ai/task-artifacts/CFG-001/` directory summarising applied diffs
+  and any unresolved questions
+
 5. Stabilize pass
-  - Run tests / linters / build
-  - Fix failures, iterate, and ensure acceptance criteria met
-  - Update `Tasks/CFG-001.yaml` (status -> `in_review`) and add evidence: commit SHAs, test summary, coverage report
-    link (if CI), and a short note
-  - Commit the updated task file and any remaining fixes
+
+- Run tests / linters / build
+- Fix failures, iterate, and ensure acceptance criteria met
+- Update `Tasks/CFG-001.yaml` (status -> `in_review`) and add evidence: commit SHAs, test summary, coverage report
+  link (if CI), and a short note
+- Commit the updated task file and any remaining fixes
+
 6. Final review & merge
-  - Operator/Reviewer reviews the PR, verifies artifacts, and merges when satisfied.
+
+- Operator/Reviewer reviews the PR, verifies artifacts, and merges when satisfied.
 
 Files created during the process (recommended):
 
@@ -160,5 +171,37 @@ Next steps (for this session)
 
 ---
 
-Progress: appended the above discussion and recommendations to this agent-notes.md file. Waiting on your confirmation to
-proceed with adding spec-artifact writing to the spec-pass prompt.
+## Update: scaffold-pass prompt and instructions added
+
+- Added: `.github/prompts/002-scaffold-pass.md`
+- Added: `.github/instructions/002-scaffold-pass-instructions.md`
+
+Next steps:
+
+- Review the scaffold-pass prompt and instructions. If approved, I'll draft the stabilize-pass prompt and instructions
+  next.
+- After creating stabilize, we'll run a quick dry run walkthrough of processing a sample task artifact to verify the
+  end-to-end flow.
+
+---
+
+## Update: stabilize-pass prompt and instructions added
+
+- Added: `.github/prompts/003-stabilize-pass.md`
+- Added: `.github/instructions/003-stabilize-pass-instructions.md`
+
+Next steps:
+
+- Review the stabilize-pass prompt and instructions. If approved, I will run through a dry-run walkthrough using a
+  sample `spec.yaml` to verify end-to-end behavior (spec -> scaffold -> stabilize).
+
+---
+
+Note: repository build/test guidance
+
+- This repository may not build or run tests by design (it contains prompts, schemas, and docs). For the stabilize
+  pass we will prefer running linters and static analysis where applicable and record results in the `stabilize.yaml`
+  and `stabilize-report.md` artifacts.
+- Details about running full build/test flows and coverage collection should be preserved here for use when creating
+  per-template stabilize prompts (e.g., Java/Gradle, Node/npm, Python/pytest). These template-specific commands and
+  checks will be added to the template prompts and recorded in these session notes to avoid losing them.
