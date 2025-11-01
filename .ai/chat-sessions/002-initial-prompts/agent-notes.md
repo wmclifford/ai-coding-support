@@ -215,3 +215,13 @@ Note: commit message formatting (recurring)
   - providing a commit message file (`git commit -F message.txt`).
 - This prevents messages from containing the characters `\n` instead of true newlines. This is a frequent source of
   review noise and must be avoided in examples and automation.
+
+---
+
+Addendum: using a temporary file for commit messages
+
+- Prefer using a commit message file to ensure proper linefeeds and wrapping:
+  - Create a temp file with the header, blank line, bulleted body (wrap at 100 chars), and optional footer.
+  - Run `git commit -F /path/to/message.txt` to use the file as the message.
+- This minimizes formatting mistakes compared to embedding message text via command-line flags and guarantees
+  compliance with our Conventional Commits format and wrapping rules.
