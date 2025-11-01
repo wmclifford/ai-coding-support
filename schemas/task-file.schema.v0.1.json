@@ -104,7 +104,6 @@
           "type": "number",
           "minimum": 0.0,
           "maximum": 1.0,
-          "default": 0.8,
           "description": "Fraction in [0,1] (e.g. 0.8 == 80%)."
         }
       },
@@ -129,6 +128,29 @@
             {
               "type": "string",
               "maxLength": 0
+            }
+          ]
+        },
+        "timestamp": {
+          "description": "ISO-8601 timestamp when the evidence was recorded.",
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "format": "date-time"
+            }
+          ]
+        },
+        "branchName": {
+          "description": "Name of the branch used for this task (pattern: <type>/<TASK-ID>-<slug>).",
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
             }
           ]
         },
