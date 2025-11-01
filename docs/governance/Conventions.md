@@ -108,6 +108,10 @@ See [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for f
 Refs: [<TASK-ID>]
 ```
 
+- Scope guidance: use scope to indicate the slice/component of the repository you changed (e.g., `docs`, `ci`,
+  `governance`, `schemas`, `templates/java`, `examples`). Do NOT use the Task ID as scope; reference the Task ID in the
+  commit footer using `Refs: <TASK-ID>`.
+
 **Body:**
 
 - Use the imperative, present tense: "change" not "changed" nor "changes"
@@ -141,6 +145,9 @@ Refs: [<TASK-ID>]
 
 1. CODE commit implements the task.
 2. EVIDENCE commit updates the task file (`Tasks/<TASK-ID>.yaml`) with `evidence.commit` = 40-char commit hash.
+
+Note: The task file schema supports optional `evidence.timestamp` (ISO-8601) and `evidence.branchName` (the branch used
+for the task). Populate these where helpful.
 
 ### Additional Rules
 

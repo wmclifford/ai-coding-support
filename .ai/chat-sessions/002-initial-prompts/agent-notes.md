@@ -205,3 +205,13 @@ Note: repository build/test guidance
 - Details about running full build/test flows and coverage collection should be preserved here for use when creating
   per-template stabilize prompts (e.g., Java/Gradle, Node/npm, Python/pytest). These template-specific commands and
   checks will be added to the template prompts and recorded in these session notes to avoid losing them.
+
+---
+
+Note: commit message formatting (recurring)
+
+- Do NOT embed literal `\n` in git commit messages. Use actual linefeeds either by:
+  - multiple `-m` flags (each `-m` adds a new paragraph), or
+  - providing a commit message file (`git commit -F message.txt`).
+- This prevents messages from containing the characters `\n` instead of true newlines. This is a frequent source of
+  review noise and must be avoided in examples and automation.
