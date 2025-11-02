@@ -31,7 +31,7 @@ progresses and not wait for the user to remind it to do so. If the instructions 
 lines of text, the user will provide the instructions for that session to the agent using a Markdown file. That file
 will be located in the directory for the notes and summary of that session.
 
-**File Glob - Agent Notes:** `.ai/chat-sessions/**/agent-notes.md`
+**File Glob - Agent Notes:** `.ai/chat-sessions/**/agent-notes.yaml`
 
 Clarification: Template vs. Session File
 
