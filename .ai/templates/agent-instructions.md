@@ -4,7 +4,7 @@
 
 # Optional metadata
 
-# session_id: <a short unique id you choose, e.g. 2025-11-01-01>
+# session_id: <a short unique id you choose, e.g. 20251101-01>
 
 # priority: <low|medium|high>
 

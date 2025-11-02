@@ -40,19 +40,19 @@ Example (YAML multi-document):
 
 ---
 
-# session_id: 2025-11-01-01
+# session_id: 20251101-01
 
-session_id: "2025-11-01-01"
+session_id: "20251101-01"
 recorded_at: "2025-11-01T14:00:00Z"
 kind: "timestamp"
 body: "Session started"
 ---
-session_id: "2025-11-01-01"
+session_id: "20251101-01"
 recorded_at: "2025-11-01T14:05:12Z"
 kind: "note"
 body: "Reviewed governing docs; identified areas to align with conventions."
 ---
-session_id: "2025-11-01-01"
+session_id: "20251101-01"
 recorded_at: "2025-11-01T14:20:00Z"
 kind: "decision"
 id: "DEC-001"
@@ -60,7 +60,7 @@ title: "Use YAML session notes"
 body: "Adopt a YAML multi-document file for session notes to enable atomic parsing."
 rationale: "Simpler to parse and allows incremental appends."
 ---
-session_id: "2025-11-01-01"
+session_id: "20251101-01"
 recorded_at: "2025-11-01T14:25:00Z"
 kind: "action"
 id: "ACT-001"

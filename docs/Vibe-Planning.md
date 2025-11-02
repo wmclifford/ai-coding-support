@@ -34,10 +34,10 @@ human user and the AI agent.
 
 ## Example Session
 
-- Session ID: `2025-11-01-01`
+- Session ID: `20251101-01`
 - Goal: Decide on project scaffolding for a new Go microservice.
 
-1. User places `agent-instructions.md` in `.ai/chat-sessions/2025-11-01-01/` with the Goal, Background, Constraints, and
+1. User places `agent-instructions.md` in `.ai/chat-sessions/20251101-01/` with the Goal, Background, Constraints, and
    Deliverables.
 2. Agent reads governing docs, previous sessions, and the session instructions.
 3. Agent records live notes into `agent-notes.md` as the session progresses.
