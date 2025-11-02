@@ -33,6 +33,20 @@ will be located in the directory for the notes and summary of that session.
 
 **File Glob - Agent Notes:** `.ai/chat-sessions/**/agent-notes.md`
 
+Clarification: Template vs. Session File
+
+- The file `.ai/templates/agent-notes.md` is a template and includes illustrative sample YAML documents; it is not
+  intended to be copied verbatim into a session folder. Instead, the agent MUST create a YAML multi-document file
+  at `.ai/chat-sessions/<session-id>/agent-notes.yaml` and append one YAML document per note.
+- The JSON Schema at `schemas/agent-notes.schema.v0.1.json` MUST be used to validate each document in the
+  session `agent-notes.yaml` file.
+- Session file and ID conventions: session IDs MUST follow the canonical pattern `YYYYMMDD-NNN` (for example
+  `20251101-001`) so session folders sort lexicographically. Decision and action IDs SHOULD follow the patterns
+  `DEC-nnn` and `ACT-nnn` respectively (e.g., `DEC-001`, `ACT-002`).
+- ID sequencing policy: by default, IDs restart per session (e.g., each session may begin with `DEC-001` and
+  `ACT-001`); when referencing a decision or action externally, include the session-id to avoid ambiguity (for example,
+  `20251101-001:DEC-001`).
+
 **File Glob - Agent Summary:** `.ai/chat-sessions/**/agent-summary.md`
 
 **File Glob - Session Instructions:** `.ai/chat-sessions/**/agent-instructions.md`

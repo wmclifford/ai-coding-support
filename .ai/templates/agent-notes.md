@@ -1,51 +1,79 @@
-# Agent Notes Template
+# Agent Notes Template (YAML multi-document)
 
-# session_id: <required: short unique id>
+This template explains how the agent should record live notes for a session using a YAML multi-document file.
 
-# timestamps: |
+File to create for a session:
 
-# - <2025-11-01T14:00:00Z> Session started
+.ai/chat-sessions/<session-id>/agent-notes.yaml
 
-# decisions:
+Each document in that YAML file is a single note (an atomic record). Documents are separated by `---`.
 
-# - id: DEC-001
+Validation:
 
-# title: Short title for decision
+- Use the JSON Schema at `schemas/agent-notes.schema.v0.1.json` to validate each YAML document.
 
-# timestamp: <ISO 8601>
+Session ID and ID conventions
 
-# decision: <brief decision statement>
+- Session IDs MUST follow the canonical pattern `YYYYMMDD-NNN` (regex `^\\d{8}-\\d{3}$`) so session folders sort
+  lexicographically. Example: `20251101-001`.
+- Decision and action IDs SHOULD follow the patterns `DEC-nnn` and `ACT-nnn` respectively (e.g., `DEC-001`, `ACT-002`).
+- ID sequencing policy: by default, IDs restart per session (e.g., each session begins with `DEC-001` and `ACT-001`).
+  When referencing items externally, include the session-id (e.g., `20251101-001:DEC-001`).
 
-# rationale: <brief rationale>
+Required fields for each note document:
 
-# action_items:
+- session_id: string (the session id)
+- recorded_at: string (ISO 8601 timestamp)
+- kind: string (one of: "note", "decision", "action", "timestamp")
+- body: string (the content of the note)
 
-# - id: ACT-001
+Optional fields for decision or action kinds:
 
-# description: Short description of the action item
+- id: string (e.g., DEC-001 or ACT-001)
+- title: string
+- rationale: string (for decisions)
+- owner: string (for action items)
+- due: string (YYYY-MM-DD)
+- status: string (open | in-progress | done)
 
-# owner: <username>
+Example (YAML multi-document):
 
-# due: <YYYY-MM-DD>
+---
 
-# status: open | in-progress | done
+# session_id: 2025-11-01-01
 
-> NOTE: The agent records timestamps as the session progresses. The agent will append entries under
-`timestamps`, `decisions`, and `action_items` during the session.
+session_id: "2025-11-01-01"
+recorded_at: "2025-11-01T14:00:00Z"
+kind: "timestamp"
+body: "Session started"
+---
+session_id: "2025-11-01-01"
+recorded_at: "2025-11-01T14:05:12Z"
+kind: "note"
+body: "Reviewed governing docs; identified areas to align with conventions."
+---
+session_id: "2025-11-01-01"
+recorded_at: "2025-11-01T14:20:00Z"
+kind: "decision"
+id: "DEC-001"
+title: "Use YAML session notes"
+body: "Adopt a YAML multi-document file for session notes to enable atomic parsing."
+rationale: "Simpler to parse and allows incremental appends."
+---
+session_id: "2025-11-01-01"
+recorded_at: "2025-11-01T14:25:00Z"
+kind: "action"
+id: "ACT-001"
+title: "Add agent-notes schema"
+body: "Create a JSON Schema for agent notes and store in schemas/"
+owner: "wmclifford"
+due: "2025-11-05"
+status: "open"
 
-## Live Notes
+Notes for the agent:
 
-Use this section to capture running notes, questions, and intermediate findings.
-
-- <time> - <note>
-
-## Decisions (human-readable summary)
-
-List decisions here in full sentences for readability.
-
-1. Decision title — short description and rationale.
-
-## Action Items
-
-1. ACT-001 — description (owner) [due YYYY-MM-DD]
-
+- Append new documents to the session `agent-notes.yaml` file as the session progresses. Each append should add a new
+  YAML document beginning with `---`.
+- Use deterministic ISO 8601 timestamps.
+- Use the `id` prefix DEC- and ACT- for decisions and actions respectively.
+- Keep the `body` field concise but sufficient to understand the context; include links if needed.
