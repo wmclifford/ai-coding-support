@@ -14,7 +14,7 @@ human user and the AI agent.
 - Session folder: `.ai/chat-sessions/<session-id>/`
   - `agent-instructions.md` — user-provided instructions for the session (template:
     `.ai/templates/agent-instructions.md`).
-  - `agent-notes.md` — running notes recorded by the agent (template: `.ai/templates/agent-notes.md`).
+  - `agent-notes.yaml` — running notes recorded by the agent (template: `.ai/templates/agent-notes.md`).
   - `agent-summary.md` — final session summary (template: `.ai/templates/agent-summary.md`).
   - `agent-override.md` (optional) — one-shot overrides for the session.
 
@@ -23,7 +23,7 @@ human user and the AI agent.
 1. User starts a session and provides the repository path and session folder name in chat.
 2. Agent reads governing documents and previous session artifacts.
 3. Agent reads `agent-instructions.md` (if present) and `agent-override.md` (if present) from the session folder.
-4. Agent records `agent-notes.md` live as the session progresses.
+4. Agent records `agent-notes.yaml` live as the session progresses.
 5. When the session ends and the plan is agreed, the agent produces `agent-summary.md` and (with permission) may
    commit/push the final plan and open a PR.
 
