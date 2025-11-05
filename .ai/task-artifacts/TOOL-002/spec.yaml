@@ -1,0 +1,72 @@
+task_id: TOOL-002
+author: GitHub Copilot
+created_at: "2025-11-05T00:00:00Z"
+acceptance_criteria: |
+  Implement a Python CLI tool to validate YAML files against a JSON Schema (Draft 2020-12) with:
+  - New script at tools/validate_yaml.py using argparse, logging.basicConfig, jsonschema (Draft202012Validator), and PyYAML (yaml.safe_load).
+  - Provide --help and --version (0.1.0). Require two positional args: <yaml_file> <schema_file>.
+  - Functions for parsing args, reading YAML/schema, validating, and formatting errors; a main() entrypoint that prints 'OK' when valid, or lists errors when invalid.
+  - Unit tests in tests/test_validate_yaml.py covering functions and CLI behavior.
+  - requirements.txt including jsonschema and PyYAML.
+  - tools/README.md updated with H2 sections for 'validate_markdown.py' and 'validate_yaml.py' (alphabetical order), brief usage, and links to jsonschema and PyYAML docs.
+  - Acceptance commands must pass:
+    - python3 tests/test_validate_yaml.py
+    - python3 tools/validate_markdown.py -s "validate_yaml.py" tools/README.md
+    - python3 tools/validate_markdown.py -s "validate_markdown.py" tools/README.md
+branch_plan:
+  branch_name_pattern: "<type>/<task-id>-<slug>"
+  initial_branch_name: "feat/TOOL-002-validate-yaml"
+  first_commit_file: "Tasks/TOOL-002.yaml"
+  first_commit_message: |
+    chore(artifacts): start task branch and add spec artifacts
+
+    Refs: TOOL-002
+planned_diffs:
+  - file: tools/validate_yaml.py
+    change: add
+    marker: "N/A (new file)"
+    description: |
+      Add CLI tool to validate a YAML file against a JSON Schema using jsonschema.Draft202012Validator and PyYAML.
+      Implement:
+      - parse_args(args): argparse with positional yaml_file and schema_file; --version 0.1.0
+      - read_yaml(path) and read_json(path)
+      - validate_instance(instance, schema) using Draft202012Validator.iter_errors
+      - format_errors(errors) → list of strings with 'path: message'
+      - validate_yaml_against_schema(yaml_path, schema_path) → (bool, List[str])
+      - main(argv) with logging.basicConfig(); print 'OK' when valid, otherwise print error lines; exit 0/1
+    justification: |
+      Core functionality required by task; enables repeatable YAML validation per acceptance criteria.
+  - file: tests/test_validate_yaml.py
+    change: add
+    marker: "N/A (new file)"
+    description: |
+      Add unittest suite covering:
+      - parse_args for positional args and --version behavior
+      - read_yaml success and YAML syntax error handling
+      - read_json success and JSON parse error handling
+      - validate_instance valid/invalid cases using a simple Draft 2020-12 schema
+      - validate_yaml_against_schema integration over temp files
+      - main() integration: exit code 0 on valid, 1 on invalid; 'OK' message on success
+    justification: |
+      Ensures functions are testable and behavior meets acceptance. tests/test_validate_yaml.py is required to exist.
+  - file: requirements.txt
+    change: add
+    marker: "N/A (new file)"
+    description: |
+      Add dependencies for the tool:
+      - jsonschema
+      - PyYAML
+    justification: |
+      Required third-party libraries per task notes; environment can install from this file.
+  - file: tools/README.md
+    change: modify
+    marker: "## validate_markdown.py"
+    description: |
+      Populate README with H2 sections for tools in alphabetical order:
+      - ## validate_markdown.py: brief description and example usage
+      - ## validate_yaml.py: brief description, example usage, and links to jsonschema and PyYAML documentation
+    justification: |
+      Acceptance validates presence of these sections; README guides operators on usage and keeps tools documented.
+questions:
+  - Confirm that the second positional argument should be a schema file path (JSON) rather than a logical name.
+  - Any pinning preferences for requirements.txt (exact versions vs latest compatible)?
