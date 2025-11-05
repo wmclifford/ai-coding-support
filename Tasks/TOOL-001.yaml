@@ -2,7 +2,7 @@ schemaVersion: 0.1.0
 id: TOOL-001
 taskTitle: |
   Create Python script to validate Markdown files.
-status: pending
+status: in_progress
 rationale: |
   - Validate Markdown file existence.
   - Validate Markdown file contains the expected sections.
@@ -29,6 +29,8 @@ acceptance:
   minCoverage: 0.0
 evidence:
   commit:
+  timestamp: "2025-11-05T11:33:00Z"
+  branchName: feat/TOOL-001-validate-markdown
   testSummary:
   ciRunUrl:
   prUrl:
