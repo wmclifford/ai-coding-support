@@ -69,7 +69,7 @@ def extract_h2_sections(markdown_text: str) -> Set[str]:
     """Extract H2 section names from Markdown text.
 
     Rules:
-    - H2 lines start with exactly two leading '# ' characters: '##'. Allow optional spaces after '##'.
+    - H2 lines start with exactly two '#' characters ('##'). Spaces after '##' are optional.
     - Ignore headings of levels other than H2.
     - Strip trailing '#' markers and surrounding whitespace from the heading text.
     - Return the set of normalized (lower-cased) section names for comparison.
@@ -115,7 +115,10 @@ def validate_markdown_file(path: Path | str, expected_sections: Sequence[str]) -
     try:
         text = read_text(path)
     except FileNotFoundError:
-        return (False, set(expected_sections) if expected_sections else set())
+        return (
+            False,
+            {_normalize_section_name(s) for s in expected_sections} if expected_sections else set()
+        )
 
     found = extract_h2_sections(text)
     return validate_sections(found, expected_sections)
@@ -149,4 +152,3 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

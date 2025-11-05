@@ -1,9 +1,7 @@
-import os
 import sys
 import tempfile
 import unittest
 from pathlib import Path
-from typing import Set
 
 # Import from tools directory by adjusting sys.path for tests
 ROOT = Path(__file__).resolve().parents[1]
@@ -11,7 +9,6 @@ TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
 from validate_markdown import (  # type: ignore
-    __version__,
     extract_h2_sections,
     parse_args,
     validate_markdown_file,
@@ -127,4 +124,3 @@ class TestMainIntegration(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
