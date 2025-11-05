@@ -122,6 +122,9 @@
           "description": "Git SHA (40 hex chars) or empty until filled by the agent.",
           "anyOf": [
             {
+              "type": "null"
+            },
+            {
               "type": "string",
               "pattern": "^[0-9a-f]{40}$"
             },
