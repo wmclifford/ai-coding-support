@@ -69,7 +69,7 @@ components:
         name: Release & publishing helpers
         description: "Scripts to check package readiness, generate changelogs, and optionally draft releases."
         priority: 3
-    policy:
+    policies:
       tools_repo_strategy: separate
       preferred_runtimes:
         - nodejs
