@@ -54,7 +54,7 @@ wiring, README, prompts, and helper scripts to integrate with agent workflows.
   - Serverless function template
 - **Python**
   - Library / package (pyproject-based)
-  - CLI tool (argparse / click)
+  - CLI tool (click; use argparse only for very simple scripts)
   - Data science/minimal notebook starter (optional)
 - **Go**
   - HTTP microservice (std, chi, or gin)
