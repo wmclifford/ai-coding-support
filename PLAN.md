@@ -165,7 +165,7 @@ for v1 templates. These are recommendations and can be overridden per-template o
 
 - **CLI libraries (recommended defaults):**
   - Node.js: `yargs` (simple, minimal)
-  - Go: `cobra` (common, feature-rich) — templates may also include a `flag`-based minimal example for micro-CLIs
+  - Go: `cobra` (common, feature-rich) or `urfave/cli` (widely used alternative) — templates may also include a `flag`-based minimal example for micro-CLIs
   - Python: `click` (you confirmed this preference)
   - Java: `picocli` (lightweight CLI library; optional for minimal Java templates)
 
