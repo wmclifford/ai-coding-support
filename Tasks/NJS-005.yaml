@@ -1,0 +1,33 @@
+schemaVersion: 0.1.0
+id: NJS-005
+taskTitle: |
+  Node.js CLI tool: add initial CI workflow to build and test the project.
+status: pending
+rationale: |
+  - Provide a CI workflow that builds and tests the project from the very beginning of the project's existence.
+  - Provide the basics required by the project's conventions and system-level instructions.
+blockingTasks: [ ]
+tags:
+  - Node.js
+  - CLI
+  - Template
+  - CI/CD
+links:
+  related: [ ]
+  docs:
+    - docs/governance/Conventions.md
+    - docs/governance/System.md
+acceptance:
+  fileGlobs:
+    - templates/nodejs/cli-tool/.github/workflows/ci.yml
+  commands: [ ]
+  testsMustExist: [ ]
+  minCoverage: 0.0
+evidence:
+  commit: ""
+  testSummary: ""
+  ciRunUrl: ""
+  prUrl: ""
+notes: |
+  - CI should include building, linting, testing, and publishing.
+  - Remember that this is a template; the specifics of the CLI tool that would be built are unknown at this time.
