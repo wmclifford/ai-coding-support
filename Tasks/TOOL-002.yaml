@@ -1,0 +1,65 @@
+schemaVersion: 0.1.0
+id: TOOL-002
+taskTitle: |
+  Create Python script to validate YAML files against a schema.
+status: pending
+rationale: |
+  - Validate YAML files against a schema in a repeatable way.
+  - The AI agent is having to do this repeatedly and is using a self-generated script.
+  - The AI agent can use this script instead by passing a couple of parameters.
+blockingTasks: [ ]
+tags:
+  - Python
+  - CLI
+  - Tool
+  - Validation
+  - Schema
+  - YAML
+links:
+  related: [ ]
+  docs:
+    - "docs/governance/Conventions.md"
+    - "docs/governance/System.md"
+acceptance:
+  fileGlobs:
+    - tools/README.md
+    - tools/validate_yaml.py
+    - tests/test_validate_yaml.py
+    - requirements.txt
+  commands:
+    - python3 tests/test_validate_yaml.py
+    - python3 tools/validate_markdown.py -s "validate_yaml.py" tools/README.md
+    - python3 tools/validate_markdown.py -s "validate_markdown.py" tools/README.md
+  testsMustExist:
+    - tests/test_validate_yaml.py
+  minCoverage: 0.0
+evidence:
+  commit:
+  testSummary:
+  ciRunUrl:
+  prUrl:
+notes: |
+  - Use `python3` as the Python interpreter; assume it is available via the virtualenv at `.ai/.venv`.
+  - Use `unittest` for testing.
+  - Use `jsonschema` and `PyYAML` dependencies for implementation.
+  - Use `argparse` for command-line argument parsing:
+      - Require the file name of the YAML file to validate.
+      - Require the name of the schema to validate against.
+      - Provide `--help` and `--version` options; initial version is `0.1.0`.
+  - Use `logging` for logging; include a `logging.basicConfig()` call in the tool.
+  - Script should use functions which can be tested; do not simply write the logic inline in the global section of the script.
+  - Include tests for each function.
+  - Include a `main()` function which is called when the script is run.
+  - YAML file is valid if:
+      - it exists
+      - `Draft202012Validator.iter_errors()` returns no errors.
+  - Output a simple 'OK' message if the YAML file is valid.
+  - Output the list of errors if the YAML file is invalid.
+  - `requirements.txt` should include `jsonschema` and `PyYAML`.
+  - Create/update `tools/README.md` to include instructions on how to use the tool; be brief but complete.
+      - Instructions should be beneath the "validate_yaml.py" level two heading.
+      - Include a link to the `jsonschema` documentation.
+      - Include a link to the `PyYAML` documentation.
+      - There will be multiple tools in this project; ensure to maintain alphabetical order in the README.
+  - We forgot to add the `validate_markdown.py` tool to the `tools/README.md` file; add its instructions to the README.
+      - Review `tools/validate_markdown.py` and `tests/test_validate_markdown.py` for context.
