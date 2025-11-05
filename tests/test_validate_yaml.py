@@ -99,7 +99,10 @@ class TestIntegration(unittest.TestCase):
                 "$schema": "https://json-schema.org/draft/2020-12/schema",
                 "type": "object",
                 "required": ["name"],
-                "properties": {"name": {"type": "string"}},
+                "properties": {
+                    "name": {"type": "string"},
+                    "age": {"type": "integer"}
+                },
                 "additionalProperties": False
             }), encoding="utf-8")
 
@@ -120,7 +123,10 @@ class TestIntegration(unittest.TestCase):
                 "$schema": "https://json-schema.org/draft/2020-12/schema",
                 "type": "object",
                 "required": ["name"],
-                "properties": {"name": {"type": "string"}},
+                "properties": {
+                    "name": {"type": "string"},
+                    "age": {"type": "integer"}
+                },
                 "additionalProperties": False
             }), encoding="utf-8")
 
@@ -136,4 +142,3 @@ class TestIntegration(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
