@@ -1,0 +1,102 @@
+# Machine-friendly plan for ai-coding-support
+components:
+  - id: ci
+    name: CI Workflows
+    purpose: "Reusable GitHub Actions and CI patterns for template validation, schema checks, linting, and security gates."
+    milestones:
+      - id: ci-core
+        name: Core CI templates
+        description: "Implement reusable GitHub Actions for linting, schema validation, conventional commit checks, and basic quality gates."
+        priority: 1
+      - id: ci-language
+        name: Template-specific CI
+        description: "Language-specific CI includes that templates can import (Node.js, Python, Go, Java)."
+        priority: 2
+      - id: ci-security
+        name: Security & compliance gates
+        description: "Add gitleaks, dependency scanning, and optional policy checks."
+        priority: 3
+    policies:
+      provider: github-actions
+      mandatory_checks:
+        - lint
+        - schema-validation
+        - gitleaks
+      medium_priority_checks:
+        - conventional-commit-check
+        - license-check
+  - id: templates
+    name: Project Templates
+    purpose: "Language-organized starter projects with CI wiring, prompts, and usage docs."
+    milestones:
+      - id: templates-define
+        name: Define canonical template types
+        description: "Choose 1–2 template types per language to implement first and document choices."
+        priority: 1
+      - id: templates-implement
+        name: Implement template scaffolds
+        description: "Create template files, prompt/instructions examples, and CI includes."
+        priority: 2
+      - id: templates-generator
+        name: Template generator CLI
+        description: "Small helper to instantiate templates and apply repo conventions."
+        priority: 3
+    first_templates:
+      nodejs:
+        - cli
+        - library
+      go:
+        - cli
+        - library
+      python:
+        - library
+        - cli
+      java:
+        - library
+  - id: tools
+    name: Helper & Support Tools
+    purpose: "Small CLIs and scripts for validation, publishing, and template generation."
+    milestones:
+      - id: tools-validate
+        name: Validation utilities
+        description: "CLI to validate schemas, task files, and artifact shapes locally; used by CI."
+        priority: 1
+      - id: tools-generate
+        name: Template generator CLI
+        description: "Instantiates templates and optionally bootstraps task files and repo metadata."
+        priority: 2
+      - id: tools-release
+        name: Release & publishing helpers
+        description: "Scripts to check package readiness, generate changelogs, and optionally draft releases."
+        priority: 3
+    policy:
+      tools_repo_strategy: separate
+      preferred_runtimes:
+        - nodejs
+        - go
+  - id: docs
+    name: Documentation & Governance
+    purpose: "Guidance for contributors and agents; ADRs for deviations from governance."
+    milestones:
+      - id: docs-canonical
+        name: Canonical docs
+        description: "Ensure governance docs are complete and referenced by templates and CI."
+        priority: 1
+      - id: docs-template-guides
+        name: Template usage guides
+        description: "Per-template README and agent usage examples."
+        priority: 2
+      - id: docs-adrs
+        name: ADRs & decision log
+        description: "Lightweight ADR process and record of decisions."
+        priority: 3
+open_questions:
+  - key: publishing-automation
+    question: "When should publishing automation be included for templates that will be published to package registries?"
+    status: open
+meta:
+  created_by: ai-agent
+  session_id: 20251104-01
+  created_at: "2025-11-04T00:00:00Z"
+  tooling_summary: TOOLING.md
+  centralized_actions_path: ".github/workflows/ and .github/actions/ or actions/"
