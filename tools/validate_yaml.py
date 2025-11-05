@@ -122,11 +122,7 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     logging.basicConfig(level=logging.INFO)
 
-    try:
-        ns = parse_args(argv)
-    except SystemExit as e:
-        # Allow argparse to handle --help/--version and similar exits
-        raise
+    ns = parse_args(argv)
 
     yaml_file = ns.yaml_file
     schema_file = ns.schema_file
