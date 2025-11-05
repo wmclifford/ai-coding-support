@@ -85,8 +85,7 @@ def extract_h2_sections(markdown_text: str) -> Set[str]:
             continue
         # Remove leading '##' and optional space
         remainder = s[2:]
-        if remainder.startswith(" "):
-            remainder = remainder[1:]
+        remainder = remainder.lstrip()
         # Trim trailing ' #' patterns and whitespace
         remainder = remainder.rstrip().rstrip('#').rstrip()
         if remainder:
