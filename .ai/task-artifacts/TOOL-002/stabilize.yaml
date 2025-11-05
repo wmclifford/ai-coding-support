@@ -1,0 +1,20 @@
+task_id: TOOL-002
+author: GitHub Copilot
+created_at: "2025-11-05T00:00:00Z"
+spec_reference: .ai/task-artifacts/TOOL-002/spec.yaml
+applied_commits:
+  - "915068c"
+  - "f7a8085"
+  - "6a6ebec"
+testSummary:
+  test:
+    errors: 0
+    failed: 0
+    skipped: 0
+    tests: 8
+  notes:
+    - "tools/validate_markdown.py acceptance checks both passed."
+lintSummary: { }
+unresolved_questions: [ ]
+version: v0.1.0
+
