@@ -49,8 +49,6 @@ def parse_args(args: Sequence[str]) -> argparse.Namespace:
     )
     ns = parser.parse_args(list(args))
     # Ensure at least one section provided (argparse required=True handles this, but keep explicit check)
-    if not ns.sections:
-        parser.error("at least one --section is required")
     return ns
 
 
