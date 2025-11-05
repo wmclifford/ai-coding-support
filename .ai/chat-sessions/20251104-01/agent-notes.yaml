@@ -1,0 +1,120 @@
+session_id: 20251104-01
+start_time: "2025-11-04T00:00:00Z"
+summary: |
+  Started vibe planning session to draft a high-level plan for the `ai-coding-support` meta-repo.
+  Focus areas: CI workflows, project templates, helper tools, and documentation.
+notes:
+  - reviewed: README.md, docs/Vibe-Planning.md, docs/three-pass-plan.md
+  - created: PLAN.md, .ai/plan.yaml (initial drafts)
+  - user_preferences_received: |
+      1) Language priority: Node.js, Go, Python, Java. Prioritize Node.js and Go to build helper tools. Use copy/paste for Java projects for now.
+      2) Use cases priority: CLI first, libraries second, web services third.
+      3) CI provider: GitHub Actions only; mandatory PR checks: lint, schema validation, gitleaks. Medium: commit message format, license checks.
+      4) Helper tools: each tool in its own repo; prefer Node.js and Go; prepare each repo for packaging/publishing and include `setup-*` Actions.
+      5) Publishing from this meta-repo: none for now; discuss per-template when appropriate.
+decisions:
+  - initial_plan_created: true
+open_questions:
+  - id: publishing-automation
+    note: "When to include publishing automation for templates (defer to per-template planning)."
+next_actions:
+  - review PLAN.md and .ai/plan.yaml with user and iterate
+  - convert agreed milestones to Tasks/*.yaml and run 3-pass workflow
+---
+session_time: "2025-11-04T00:45:00Z"
+summary: |
+  Appended user confirmations and a short summary of recommended tooling per language. These defaults will be
+  used to seed minimal templates and to guide CI/tooling choices in early milestones.
+user_confirmations:
+  languages_priority:
+    - nodejs
+    - go
+    - python
+    - java
+  template_focus_order:
+    - cli
+    - library
+    - web_service
+  ci_provider: github-actions
+  mandatory_checks:
+    - lint
+    - schema-validation
+    - gitleaks
+  medium_priority_checks:
+    - conventional-commit-check
+    - license-check
+  tools_repo_strategy: separate
+  tool_runtimes:
+    - nodejs
+    - go
+  centralized_actions_repo: true
+  publishing_policy: deferred_per_template
+  preferred_build_tools:
+    nodejs: npm
+    go: go-modules
+    python: poetry
+    java: gradle
+  default_linters:
+    nodejs: [ eslint, prettier ]
+    go: [ golangci-lint ]
+    python: [ flake8, black ]
+    java: [ checkstyle, pmd ]
+  default_cli_libs:
+    nodejs: [ yargs ]
+    go: [ cobra, urfave/cli ]
+    python: [ click ]
+    java: [ picocli ]
+  default_test_frameworks:
+    nodejs: [ jest ]
+    go: [ go test ]
+    python: [ pytest ]
+    java: [ junit5 ]
+brave_search_summary:
+  nodejs:
+    linters: "ESLint + Prettier are commonly recommended: Prettier for formatting, ESLint for code-quality rules."
+    cli_libs: "Yargs and Commander are the most common; Yargs is a good default for declarative parsing."
+    sources:
+      - https://prettier.io/docs/comparison
+      - https://betterstack.com/community/guides/scaling-nodejs/prettier-vs-eslint/
+  go:
+    linters: "golangci-lint is widely recommended as an aggregator (wraps staticcheck, govet, etc.)."
+    cli_libs: "Cobra is the most used for feature-rich CLIs; urfave/cli is a lighter alternative."
+    sources:
+      - https://golangci-lint.run/docs/welcome/
+      - https://github.com/Oursin/Go-CLI-Comparison
+  python:
+    linters: "Flake8 is common (user preference); Ruff is an increasingly popular, faster alternative; Black for formatting."
+    cli_libs: "Click is widely used and confirmed by the user; Typer and argparse are alternatives depending on needs."
+    sources:
+      - https://github.com/astral-sh/ruff
+      - https://realpython.com/comparing-python-command-line-parsing-libraries-argparse-docopt-click/
+  java:
+    linters: "Checkstyle and PMD are standard choices; SpotBugs is a useful additional static-analysis tool."
+    cli_libs: "Picocli is a modern, feature-rich CLI library and a reasonable default for Java CLIs."
+    sources:
+      - https://symflower.com/en/company/blog/2024/static-analysis-java/
+      - https://github.com/remkop/picocli/wiki/CLI-Comparison
+notes:
+  - I will append a new YAML document to this file after each substantive session update as requested.
+  - No `Tasks/*.yaml` created in this session; task creation will be performed in later sessions per your instruction.
+---
+session_time: "2025-11-04T01:00:00Z"
+summary: "Created TOOLING.md (tooling defaults quick-reference) and updated .ai/plan.yaml to reference it and centralized Actions paths."
+artifacts_created:
+  - TOOLING.md
+modified_files:
+  - .ai/plan.yaml
+notes:
+  - TOOLING.md summarizes default linters, CLI libs, test frameworks, and packaging choices.
+  - Centralized Actions policy recorded in .ai/plan.yaml (key: centralized_actions_path).
+---
+session_time: "2025-11-04T01:15:00Z"
+summary: "Beautified `PLAN.md` with improved Markdown headings and formatting; preserved original content."
+changes:
+  - modified: PLAN.md
+  - description: "Converted plain text sections to Markdown headings/subheadings, added horizontal rules for separation, and standardized bolding for milestones and policies. No content was removed."
+verification:
+  - run: get_errors on modified files (PLAN.md and .ai/chat-sessions/20251104-01/agent-notes.yaml)
+next_actions:
+  - run: get_errors for modified files and report results
+  - note: "If errors appear, I will fix them and re-run the check."
