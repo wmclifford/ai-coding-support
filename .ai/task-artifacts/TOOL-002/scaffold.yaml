@@ -1,6 +1,6 @@
 task_id: TOOL-002
 author: GitHub Copilot
-created_at: 2025-11-05T00:00:00Z
+created_at: "2025-11-05T00:00:00Z"
 spec_reference: .ai/task-artifacts/TOOL-002/spec.yaml
 applied_diffs:
   - file: tools/validate_yaml.py
@@ -34,4 +34,3 @@ applied_diffs:
 
       Refs: TOOL-002
 version: v0.1.0
-

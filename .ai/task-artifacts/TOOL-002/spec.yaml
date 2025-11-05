@@ -1,6 +1,6 @@
 task_id: TOOL-002
 author: GitHub Copilot
-created_at: 2025-11-05T00:00:00Z
+created_at: "2025-11-05T00:00:00Z"
 acceptance_criteria: |
   Implement a Python CLI tool to validate YAML files against a JSON Schema (Draft 2020-12) with:
   - New script at tools/validate_yaml.py using argparse, logging.basicConfig, jsonschema (Draft202012Validator), and PyYAML (yaml.safe_load).
@@ -70,4 +70,3 @@ planned_diffs:
 questions:
   - Confirm that the second positional argument should be a schema file path (JSON) rather than a logical name.
   - Any pinning preferences for requirements.txt (exact versions vs latest compatible)?
-
