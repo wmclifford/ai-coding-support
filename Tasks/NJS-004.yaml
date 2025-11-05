@@ -1,0 +1,47 @@
+schemaVersion: 0.1.0
+id: NJS-004
+taskTitle: |
+  Node.js CLI tool: add 3-pass plan prompts and instructions.
+status: pending
+rationale: |
+  - All projects should include our 3-pass plan prompts and instructions.
+blockingTasks: [ ]
+tags:
+  - Node.js
+  - CLI
+  - Template
+  - 3-pass Plan
+  - PIV
+  - SSS
+links:
+  related: [ ]
+  docs:
+    - .github/instructions/001-spec-pass-instructions.md
+    - .github/instructions/002-scaffold-pass-instructions.md
+    - .github/instructions/003-stabilize-pass-instructions.md
+    - .github/prompts/001-spec-pass.md
+    - .github/prompts/002-scaffold-pass.md
+    - .github/prompts/003-stabilize-pass.md
+    - docs/governance/Conventions.md
+    - docs/three-pass-plan.md
+acceptance:
+  fileGlobs:
+    - templates/nodejs/cli-tool/.github/instructions/spec-pass-instructions.md
+    - templates/nodejs/cli-tool/.github/instructions/scaffold-pass-instructions.md
+    - templates/nodejs/cli-tool/.github/instructions/stabilize-pass-instructions.md
+    - templates/nodejs/cli-tool/.github/prompts/spec-pass.md
+    - templates/nodejs/cli-tool/.github/prompts/scaffold-pass.md
+    - templates/nodejs/cli-tool/.github/prompts/stabilize-pass.md
+    - templates/nodejs/cli-tool/docs/three-pass-plan.md
+  commands: [ ]
+  testsMustExist: [ ]
+  minCoverage: 0.0
+evidence:
+  commit: ""
+  testSummary: ""
+  ciRunUrl: ""
+  prUrl: ""
+notes: |
+  - Include the 3-pass plan prompts and instructions in the template.
+  - Remember that this is a template; the specifics of the CLI tool that would be built are unknown at this time.
+  - The 3-pass plan prompts and instructions may be taken verbatim from this project; adapt as necessary.

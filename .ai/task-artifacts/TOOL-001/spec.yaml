@@ -1,0 +1,48 @@
+task_id: TOOL-001
+author: AI Agent
+created_at: "2025-11-05T12:00:00Z"
+acceptance_criteria: |
+  - Create Python CLI tool at tools/validate_markdown.py using only the standard library.
+  - Provide argparse-based interface requiring a markdown file path and one or more expected section names.
+  - Provide --help and --version (0.1.0).
+  - Use logging with logging.basicConfig().
+  - Implement logic as testable functions (no top-level inline logic); include main().
+  - Write unit tests using unittest at tests/test_validate_markdown.py covering each function.
+  - Validation rules: file must exist and contain each expected section as a level-two heading (lines starting with "## ").
+branch_plan:
+  branch_name_pattern: "<type>/<TASK-ID>-<slug>"
+  initial_branch_name: "feat/TOOL-001-validate-markdown"
+  first_commit_file: "Tasks/TOOL-001.yaml"
+  first_commit_message: |
+    chore(artifacts): start task branch and add spec artifacts
+
+    Refs: TOOL-001
+planned_diffs:
+  - file: tools/validate_markdown.py
+    change: add
+    marker: "CREATE tools/validate_markdown.py"
+    description: |
+      Add a Python CLI script that validates existence of a markdown file and presence of specified level-two headings.
+      Functions to implement:
+        - parse_args(args)
+        - read_text(path)
+        - extract_h2_sections(markdown_text)
+        - validate_sections(found_sections, expected_sections)
+        - validate_markdown_file(path, expected_sections)
+        - main()
+      CLI: positional markdown_file and repeated --section/-s flags (at least one).
+      Comparison: case-insensitive match on section names; normalize to lower-case when comparing.
+      Exit code 0 for valid, 1 for invalid; argparse handles parse errors.
+    justification: Implements TOOL-001 acceptance criteria using stdlib only.
+  - file: tests/test_validate_markdown.py
+    change: add
+    marker: "CREATE tests/test_validate_markdown.py"
+    description: |
+      Add unittest test module with coverage for each function and core edge cases:
+        - extract_h2_sections parses headings correctly and ignores other levels.
+        - validate_sections returns missing/present sets, case-insensitive comparison.
+        - validate_markdown_file returns True/False for valid/invalid files, including missing file.
+        - parse_args parses positional file and multiple --section flags.
+        - case-insensitive behavior: expected sections match regardless of case differences in file vs input.
+    justification: Required by acceptance to ensure correctness and provide runnable tests.
+questions: [ ]

@@ -1,0 +1,58 @@
+schemaVersion: 0.1.0
+id: TOOL-001
+taskTitle: |
+  Create Python script to validate Markdown files.
+status: in_review
+rationale: |
+  - Validate Markdown file existence.
+  - Validate Markdown file contains the expected sections.
+  - Not meant to be a complete Markdown validator; just something basic for sanity checking.
+blockingTasks: [ ]
+tags:
+  - Python
+  - CLI
+  - Tool
+  - Validation
+links:
+  related: [ ]
+  docs:
+    - "docs/governance/Conventions.md"
+    - "docs/governance/System.md"
+acceptance:
+  fileGlobs:
+    - tools/validate_markdown.py
+    - tests/test_validate_markdown.py
+  commands:
+    - python3 tests/test_validate_markdown.py
+  testsMustExist:
+    - tests/test_validate_markdown.py
+  minCoverage: 0.0
+evidence:
+  commit: eb165e2364bcd3454a108650151f0d87ebc35415
+  timestamp: "2025-11-05T11:46:00Z"
+  branchName: feat/TOOL-001-validate-markdown
+  testSummary:
+    test:
+      tests: 11
+      failed: 0
+      errors: 0
+      skipped: 0
+  ciRunUrl:
+  prUrl:
+notes: |
+  - Use `python3` as the Python interpreter; assume it is on the `PATH`.
+  - Use `unittest` for testing.
+  - Use the Python standard library for implementation of both the tool and the test cases; we do not want to require
+    use of dependency management such as `setuptools` or `poetry`.
+  - Use `argparse` for command-line argument parsing:
+      - Require the file name of the Markdown file to validate.
+      - Require the names of the sections we expect to find in the file; there should be at least one value and expect
+        there to be multiple as common usage.
+      - Provide `--help` and `--version` options; initial version is `0.1.0`.
+  - Use `logging` for logging; include a `logging.basicConfig()` call in the tool.
+  - Script should use functions which can be tested; do not simply write the logic inline in the global section of the script.
+  - Include tests for each function. 
+  - Include a `main()` function which is called when the script is run.
+  - Markdown file is valid if:
+      - it exists
+      - it contains each of the expected sections at a level two heading (`## <SECTION-NAME>`)

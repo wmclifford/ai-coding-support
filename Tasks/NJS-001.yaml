@@ -1,0 +1,38 @@
+schemaVersion: 0.1.0
+id: NJS-001
+taskTitle: |
+  Node.js CLI tool: create template "Goals.md" governing document.
+status: pending
+rationale: |
+  - Provide a template "Goals.md" that the user must complete as part of bootstrapping a new Node.js CLI tool project.
+  - The template should be a Markdown document containing the basic sections required to define the goals of the project.
+  - The template should provide as much common information as possible to reduce the amount of boilerplate required to get started.
+blockingTasks: [ ]
+tags:
+  - Node.js
+  - CLI
+  - Governance
+  - Template
+links:
+  related: [ ]
+  docs:
+    - "docs/governance/Conventions.md"
+acceptance:
+  fileGlobs:
+    - templates/nodejs/cli-tool/docs/governance/Goals.md
+  commands: [ ]
+  testsMustExist: [ ]
+  minCoverage: 0.0
+evidence:
+  commit: ""
+  testSummary: ""
+  ciRunUrl: ""
+  prUrl: ""
+notes: |
+  - An example of a completed "Goals.md" for a Java project is located at `examples/governance/Goals.md`; this may be
+    used as an example and adapted to fit the needs of a Node.js CLI tool project.
+  - The `docs/governance/Goals.md` for this project may also be used as an example, although this project does not have
+    any coding tasks, just documentation.
+  - Include at least the following sections: "Overview", "Non-negotiable", and "Architecture". Others may be added where
+    appropriate.
+  - Remember that this is a template; the specifics of the CLI tool that would be built are unknown at this time.
