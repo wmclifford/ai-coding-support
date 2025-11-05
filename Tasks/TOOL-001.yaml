@@ -2,7 +2,7 @@ schemaVersion: 0.1.0
 id: TOOL-001
 taskTitle: |
   Create Python script to validate Markdown files.
-status: in_review
+status: done
 rationale: |
   - Validate Markdown file existence.
   - Validate Markdown file contains the expected sections.
@@ -28,8 +28,8 @@ acceptance:
     - tests/test_validate_markdown.py
   minCoverage: 0.0
 evidence:
-  commit: eb165e2364bcd3454a108650151f0d87ebc35415
-  timestamp: "2025-11-05T11:46:00Z"
+  commit: 6caffdcb511c38bc8b3098e13754361ebc3337df
+  timestamp: "2025-11-05T17:33:00Z"
   branchName: feat/TOOL-001-validate-markdown
   testSummary:
     test:
@@ -37,8 +37,8 @@ evidence:
       failed: 0
       errors: 0
       skipped: 0
-  ciRunUrl:
-  prUrl:
+  ciRunUrl: ""
+  prUrl: "https://github.com/wmclifford/ai-coding-support/pull/5"
 notes: |
   - Use `python3` as the Python interpreter; assume it is on the `PATH`.
   - Use `unittest` for testing.
