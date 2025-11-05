@@ -1,0 +1,37 @@
+task_id: TOOL-002
+author: GitHub Copilot
+created_at: 2025-11-05T00:00:00Z
+spec_reference: .ai/task-artifacts/TOOL-002/spec.yaml
+applied_diffs:
+  - file: tools/validate_yaml.py
+    action: add
+    commit_sha: f7a80853c2
+    commit_message: |
+      feat(tools): add YAML validation CLI and tests
+
+      Refs: TOOL-002
+    notes: Added CLI implementation with jsonschema and PyYAML, tests separately in same commit for simplicity.
+  - file: tests/test_validate_yaml.py
+    action: add
+    commit_sha: f7a80853c2
+    commit_message: |
+      feat(tools): add YAML validation CLI and tests
+
+      Refs: TOOL-002
+  - file: tools/README.md
+    action: modify
+    commit_sha: 915068c2
+    commit_message: |
+      chore(artifacts): start task branch and add spec artifacts
+
+      Refs: TOOL-002
+    notes: README was introduced in this series and includes both tool sections.
+  - file: requirements.txt
+    action: add
+    commit_sha: 915068c2
+    commit_message: |
+      chore(artifacts): start task branch and add spec artifacts
+
+      Refs: TOOL-002
+version: v0.1.0
+
