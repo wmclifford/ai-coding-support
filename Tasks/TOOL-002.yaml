@@ -2,7 +2,7 @@ schemaVersion: 0.1.0
 id: TOOL-002
 taskTitle: |
   Create Python script to validate YAML files against a schema.
-status: pending
+status: in_progress
 rationale: |
   - Validate YAML files against a schema in a repeatable way.
   - The AI agent is having to do this repeatedly and is using a self-generated script.
