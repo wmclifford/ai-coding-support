@@ -160,7 +160,7 @@ for v1 templates. These are recommendations and can be overridden per-template o
 - **Linters & formatters (recommended defaults):**
   - Node.js: `eslint` + `prettier` (widely used; integrates with editor tooling)
   - Go: `golangci-lint` (aggregator that wraps many Go linters)
-  - Python: `flake8` + `black` (you prefer `flake8`; `black` for formatting)
+  - Python: `flake8` for linting; `black` for formatting
   - Java: `checkstyle` + `pmd` (you commonly include PMD in addition to Checkstyle)
 
 - **CLI libraries (recommended defaults):**
