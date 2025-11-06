@@ -55,7 +55,7 @@ CI behavior and gating:
 - For speed, run fast checks (commitlint, quick lint) early; run heavier checks (schema validation, full gitleaks) in a
   subsequent job or in a PR `check` job.
 
-Example workflow guidance (do not add workflow file here; add to `.github/workflows/ci.yml` as an example):
+Example workflow guidance (do not add the workflow file here; add to `.github/workflows/ci.yml` as an example):
 
 - Use matrix jobs to parallelize format/lint/security checks.
 - Use an input parameter or environment variable to point to the `TOOLING_REPO` for schema validation (keep default as a
@@ -100,7 +100,7 @@ Example workflow guidance (do not add workflow file here; add to `.github/workfl
 
 - The task-file validator and other enforcement tooling are expected to live in a separate tooling repo (see
   `task_validator_repo` placeholder in the YAML header). Example validators:
-  - Task schema validation (JSON/YAML schema check).
+  - Task schema validation (JSON/YAML schema check); presently supported by `tools/validate_yaml.py`.
   - Task status and evidence checks (ensures `evidence.commit` present when required).
   - Documentation link and build checks.
 

@@ -20,7 +20,7 @@ When executing the spec-pass prompt, follow these rules:
     short note like "spec pass: branch created").
   - Also add the generated spec artifacts under `.ai/task-artifacts/<TASK-ID>/` to that FIRST commit so that the repo
     contains the spec artifacts for auditing purposes.
-  - Subsequent commits may contain code, tests, and other changes as planned.
+  - Later commits may contain code, tests, and other changes as planned.
 - The agent must not perform branch creation or commits until it receives explicit approval from the operator.
 - Keep prompts and answers concise and machine-readable where possible.
 

@@ -20,12 +20,12 @@ When executing the stabilize-pass prompt, follow these rules:
 
 Artifact & validation rules:
 
-- The stabilize pass MUST produce two artifacts under `.ai/task-artifacts/<TASK-ID>/`:
+- The Stabilize pass MUST produce two artifacts under `.ai/task-artifacts/<TASK-ID>/`:
   - `stabilize.yaml` — canonical machine-readable artifact describing the stabilization outcome (consumed by automation
     and used to populate task evidence).
   - `stabilize-report.md` — human-friendly markdown summary with key details, commands run, and unresolved questions.
-- Validate `stabilize.yaml` against `schemas/stabilize-artifact.schema.v0.1.json` before committing. If validation
-  fails, present errors and stop.
+- Validate `stabilize.yaml` against `schemas/stabilize-artifact.schema.v0.1.json` before committing. Use
+  `tools/validate_yaml.py` to perform the validation. If validation fails, present errors and stop.
 
 Test summary / evidence format:
 
@@ -44,9 +44,9 @@ When executing stabilization steps:
 
 - Validate `scaffold.yaml` and ensure the branch is checked out.
 - Run linters and static analysis first. Capture and summarize output.
-- Only run unit/integration tests if `acceptance.commands` or project metadata indicate tests are expected; otherwise,
+- Only run unit/integration tests if `acceptance.commands` or project metadata indicates tests are expected; otherwise,
   skip tests and record this fact in `stabilize-notes.md` and in `stabilize.yaml`/`stabilize-report.md` (see above for
-  example object).
+  an example object).
 - For each iterative fix, commit using Conventional Commits: `fix(<TASK-ID>): short description` or
   `refactor(<TASK-ID>): short description`.
 

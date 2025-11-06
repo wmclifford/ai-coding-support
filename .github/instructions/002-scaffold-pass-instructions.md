@@ -9,12 +9,13 @@ When executing the scaffold-pass prompt, follow these rules:
 
 - Read the governing docs and the `spec-artifact` schema before applying changes.
 - The scaffold pass must validate the spec artifact at `.ai/task-artifacts/<TASK-ID>/spec.yaml` against
-  `schemas/spec-artifact.schema.v0.1.json` and fail fast if validation errors exist.
+  `schemas/spec-artifact.schema.v0.1.json` and fail fast if validation errors exist. Use `tools/validate_yaml.py` to
+  perform the validation.
 - Do not attempt to guess unclear modifications: record questions and add TODO markers in files where human
   clarification is required.
 - Always apply diffs in the order listed in `planned_diffs`.
-- Commit each applied diff separately using the Conventional Commits format: `type(scope): subject` where `scope` MUST
-  be the `<TASK-ID>` (e.g.,
+- **Commit each applied diff separately** using the Conventional Commits format: `type(scope): subject` where `scope`
+  MUST be the `<TASK-ID>` (e.g.,
   `feat(CFG-001): add src/main/java/com/example/ConfigLoader.java — add placeholder loadFromEnv`).
   - Use commit `type` based on the action:
     - `add` -> `feat` (new functionality) or `docs` if it's documentation only
@@ -22,15 +23,17 @@ When executing the scaffold-pass prompt, follow these rules:
     - `delete` -> `chore`
     - `rename` -> `refactor`
     - `test` -> `test`
-  - The `subject` should be a short imperative summary that includes the action and path. Optionally include a short `—`
-    separated description.
+  - The `subject` should be a short imperative summary that includes the action and path.
+  - The `body` should include a detailed description of the change (bullet points, wrap lines at 100 characters).
+  - The `footer` should include any relevant issue numbers (e.g., `Refs: [<TASK-ID>]`).
 - After completing changes, create two scaffold artifacts in `.ai/task-artifacts/<TASK-ID>/`:
   - `scaffold.yaml` — machine-readable YAML report listing applied diffs and commit SHAs (for automation and audit)
   - `scaffold-report.md` — human-friendly summary with applied diffs, small unified-diff sketches (if helpful),
     unresolved questions, and timestamps
-- Validate the generated `scaffold.yaml` against `schemas/scaffold-artifact.schema.v0.1.json` before committing it. If
-  validation fails, present the errors, do not commit, and request operator direction.
-- The agent must not perform the stabilize pass automatically; wait for operator approval.
+- Validate the generated `scaffold.yaml` against `schemas/scaffold-artifact.schema.v0.1.json` before committing it.
+  Use `tools/validate_yaml.py` to perform the validation. If validation fails, present the errors, do not commit, and
+  request directions from the operator.
+- The agent must not perform the Stabilize pass automatically; wait for operator approval.
 
 Operational notes:
 

@@ -17,9 +17,11 @@ write_spec_artifact: true
 
 ## Task
 
-Produce a concise, review-ready "spec" describing the planned diffs for the requested task. The spec must list the exact
-file diffs you propose (file paths and the regions/lines or clear markers), explain why each change is required, and
-describe the branch/commit plan that will be used if the spec is approved.
+Produce a concise, review-ready "spec" describing the planned diffs for the requested task. The spec must:
+
+- list the exact file diffs you propose (file paths and the regions/lines or clear markers),
+- explain why each change is required, and
+- describe the branch/commit plan that will be used if the spec is approved.
 
 Do not make edits yet. This pass only produces the planned diffs and any clarifying questions.
 
@@ -37,17 +39,21 @@ Do not make edits yet. This pass only produces the planned diffs and any clarify
 2. Ask the operator for the exact task file path to process (relative to repository root).
 3. Once the task file path is provided, read the task file and summarize its acceptance criteria in one paragraph.
 4. Produce a list of planned diffs. For each planned change, include:
-  - file path
-  - a brief description of the change
-  - an approximate region or marker (e.g., "add new class X in `src/main/java/com/example/X.java` between package
+
+  + file path
+  + a brief description of the change
+  + an approximate region or marker (e.g., "add new class X in `src/main/java/com/example/X.java` between package
     declaration and existing imports")
-  - a short justification tying the change to the task's acceptance criteria
+  + a short justification tying the change to the task's acceptance criteria
+
 5. If `write_spec_artifact: true` in the prompt header, write two artifacts to the repo under
    `.ai/task-artifacts/<TASK-ID>/`:
-  - `spec.yaml` — a machine-readable YAML spec following the project's schema (schemas/spec-artifact.schema.v0.1.json)
-  - `planned-diffs.md` — a human-friendly planned-diffs document with small unified-diff sketches or clear edit markers
+
+  + `spec.yaml` — a machine-readable YAML spec following the project's schema (`schemas/spec-artifact.schema.v0.1.json`)
+  + `planned-diffs.md` — a human-friendly planned-diffs document with small unified-diff sketches or clear edit markers
     Note: writing artifacts is permitted in this pass, but do NOT commit them until the operator approves the spec and
     instructs the agent to create the task branch. See step 6.
+
 6. Describe the branch and commit plan to be executed upon approval (branch name pattern, first commit must be the
    updated task file with status changed to `in_progress` and a note; include that the `*.yaml` artifacts under
    `.ai/task-artifacts/<TASK-ID>/` will be committed together with the updated task file as part of the FIRST commit on
